@@ -7,6 +7,10 @@ export default class Modal extends Component {
     window.addEventListener("keydown", this.props.handleModalClose);
   }
 
+  componentWillUnmount() {
+    window.removeEventListener("keydown", this.props.handleModalClose);
+  }
+
   render() {
     return (
       <div className={styles.Overlay} onClick={this.props.handleModalClose}>
