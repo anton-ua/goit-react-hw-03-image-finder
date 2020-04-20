@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import Searchbar from "./Searchbar/Searchbar";
-import ImageGallery from "./ImageGallery/ImageGallery";
-import ButtonLoadMore from "./ButtonLoadMore/ButtonLoadMore";
-import Modal from "./Modal/Modal";
-import * as imagesApi from "../Services/Service";
+import Searchbar from "../Searchbar/Searchbar";
+import ImageGallery from "../ImageGallery/ImageGallery";
+import ButtonLoadMore from "../ButtonLoadMore/ButtonLoadMore";
+import Modal from "../Modal/Modal";
+import * as imagesApi from "../../Services/Service";
 import styles from "./App.module.css";
 import Loader from "react-loader-spinner";
 
@@ -13,14 +13,14 @@ export default class App extends Component {
     search: "",
     page: 1,
     loaderVisible: false,
-    modal: false
+    modal: false,
   };
 
   handleChange = ({ target }) => {
     this.setState({ search: target.value });
   };
 
-  handleSubmit = async e => {
+  handleSubmit = async (e) => {
     e.preventDefault();
 
     await this.setState({ page: 1, images: [] });
@@ -29,8 +29,8 @@ export default class App extends Component {
   };
 
   handleLoad = async () => {
-    await this.setState(state => ({
-      page: state.page + 1
+    await this.setState((state) => ({
+      page: state.page + 1,
     }));
     this.FetchImages(this.state.search, this.state.page);
   };
@@ -44,7 +44,7 @@ export default class App extends Component {
             document.documentElement.scrollTop +
             document.documentElement.clientHeight -
             140,
-          behavior: "smooth"
+          behavior: "smooth",
         });
     }
   }
@@ -54,8 +54,8 @@ export default class App extends Component {
     imagesApi
       .FetchImages(search, page)
       .then(({ data }) => {
-        this.setState(state => ({
-          images: [...state.images, ...data.hits]
+        this.setState((state) => ({
+          images: [...state.images, ...data.hits],
         }));
       })
       .catch(console.log);

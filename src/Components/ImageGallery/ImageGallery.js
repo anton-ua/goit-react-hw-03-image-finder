@@ -8,7 +8,6 @@ const ImageGallery = ({ images, handleModalOpen }) => (
     {images.map(({ id, webformatURL, largeImageURL, tags }) => (
       <ImageGalleryItem
         key={id}
-        id={id}
         webformatURL={webformatURL}
         largeImageURL={largeImageURL}
         tags={tags}
@@ -19,8 +18,15 @@ const ImageGallery = ({ images, handleModalOpen }) => (
 );
 
 ImageGallery.propTypes = {
-  images: PropTypes.array.isRequired,
-  handleModalOpen: PropTypes.func.isRequired
+  images: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      webformatURL: PropTypes.string.isRequired,
+      largeImageURL: PropTypes.string.isRequired,
+      tags: PropTypes.string.isRequired,
+    })
+  ),
+  handleModalOpen: PropTypes.func.isRequired,
 };
 
 export default ImageGallery;
